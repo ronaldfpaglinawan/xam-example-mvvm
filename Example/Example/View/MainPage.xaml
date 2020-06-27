@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Example.ViewModel"
+             mc:Ignorable="d"
+             x:Class="Example.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:MainVM x:Key="mainVM"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout BindingContext="{StaticResource mainVM}" 
+                 Margin="16, 32, 16, 0">
+        <Label x:Name="greetingLabel"
+               Text="{Binding Greeting}"/>
+        <Entry x:Name="nameEntry"
+               Text="{Binding Username, Mode=TwoWay}"
+                Placeholder="Enter your name"/>
+        <Button Text="Clear value"
+                Command="{Binding ClearCommand}"
+                CommandParameter="{Binding Username}"/>
+        <ListView x:Name="exampleListView"
+                  Margin="-16,0"
+                  ItemsSource="{Binding Contacts}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}"
+                              Detail="{Binding Email}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
